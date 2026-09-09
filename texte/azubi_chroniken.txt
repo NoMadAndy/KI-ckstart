@@ -1,0 +1,61 @@
+Die Azubi-Chroniken
+
+Montag. Der erste Kaffee des Tages ist der wichtigste Kaffee des Tages. Die Kaffeemaschine im dritten Stock brummt, und alle Azubis stehen davor und warten. Der Server im Keller brummt auch, aber niemand wartet auf ihn.
+
+Das Ticket mit der Nummer 4711 ist wieder aufgetaucht. Jeder Azubi kennt das Ticket 4711. Es wandert von Team zu Team wie ein Wanderpokal, den niemand gewinnen will. Heute liegt es bei den Systemintegratoren.
+
+Die Ausbilderin sagt: Wer den Fehler findet, bekommt einen Kaffee. Die Azubis suchen den Fehler. Der Fehler sitzt, wie so oft, vor dem Bildschirm. Aber das sagt niemand laut.
+
+Dienstag. Heute lernen wir Docker. Ein Container ist wie eine Lunchbox für Software. Alles ist drin, was das Programm braucht, und nichts, was es nicht braucht. Die Lunchbox der Azubis enthält heute nur einen Apfel.
+
+Der Datenanalyst öffnet die Tabelle. Die Tabelle hat vierhundert Spalten. Er schließt die Tabelle wieder und trinkt einen Kaffee. Dann öffnet er die Tabelle erneut, denn Daten laufen nicht weg.
+
+Die Anwendungsentwicklerin schreibt eine Funktion. Die Funktion hat einen Bug. Sie schreibt einen Test. Der Test findet den Bug. Sie behebt den Bug. Der Test ist grün. So einfach kann Programmieren sein, wenn man Tests schreibt.
+
+Mittwoch. Der Systemintegrator hat das Netzwerk repariert. Das Netzwerk war nicht kaputt, nur das Kabel war nicht eingesteckt. Das Kabel ist jetzt eingesteckt. Alle applaudieren. Der Server brummt zufrieden.
+
+Die Jugendvertretung trifft sich im Besprechungsraum. Auf dem Tisch stehen Kekse und eine Kanne Kaffee. Die Jugendvertretung redet über Ausbildung, über Übernahme und über die Frage, ob die Kaffeemaschine im dritten Stock endlich ersetzt wird.
+
+Der Betriebsrat sagt: Mitbestimmung heißt, dass man vorher gefragt wird und nicht nachher. Die Azubis nicken. Dann fragen sie vorher, ob es noch Kekse gibt.
+
+Donnerstag. Heute geht es um Künstliche Intelligenz. Ein Modell lernt aus Beispielen. Es sieht viele Beispiele und wird jedes Mal ein kleines bisschen besser. Die Azubis sehen viele Beispiele und werden auch jedes Mal ein kleines bisschen besser. Das ist der Plan.
+
+Ein Neuron nimmt Zahlen, multipliziert sie mit Gewichten und gibt eine Zahl zurück. Viele Neuronen zusammen ergeben ein Netz. Ein Netz mit vielen Gewichten kann viel lernen, aber es braucht viele Daten und viel Geduld.
+
+Der Fehler heißt Loss. Der Loss soll klein werden. Das Training macht den Loss kleiner, Schritt für Schritt. Wenn die Lernrate zu groß ist, springt das Modell hin und her wie ein Azubi vor der Kaffeemaschine. Wenn die Lernrate zu klein ist, dauert das Training bis zur Rente.
+
+Das Modell hat die Trainingsdaten auswendig gelernt. Auf neuen Daten macht es Fehler. Das nennt man Overfitting. Die Ausbilderin sagt: Auswendig lernen hilft in der Prüfung nur, wenn die Prüfung dieselben Fragen stellt. Das tut sie nie.
+
+Freitag. Der Agent bekommt einen Auftrag. Der Agent plant, ruft ein Werkzeug auf, liest das Ergebnis und plant weiter. Der Agent baut eine Web-App. Die Web-App hat einen Dark Mode, und alle Azubis sind begeistert.
+
+Der Server im Keller hat eine neue Grafikkarte bekommen. Die Grafikkarte rechnet Matrizen, den ganzen Tag lang, ohne Kaffee. Die Azubis finden das beeindruckend und ein bisschen unheimlich.
+
+Die Anwendungsentwicklerin fragt den Assistenten, was die Funktion macht. Der Assistent erklärt es. Die Anwendungsentwicklerin prüft die Erklärung. Sie stimmt. Vertrauen ist gut, prüfen ist besser, sagt die Ausbilderin.
+
+Der Datenanalyst hat einen Trend gefunden. Der Trend zeigt nach oben. Er zeigt den Trend dem Team. Das Team fragt, ob der Trend echt ist oder nur ein Zufall. Der Datenanalyst rechnet nach. Der Trend ist echt. Alle sind erleichtert.
+
+Der Systemintegrator installiert das Update. Das Update braucht einen Neustart. Der Neustart braucht fünf Minuten. In fünf Minuten kann man einen Kaffee holen. Das ist die eigentliche Funktion von Updates.
+
+Die dualen Studenten schreiben eine Hausarbeit über Prozesse. Ein Prozess hat einen Anfang, ein Ende und dazwischen viele Schritte. Genau wie eine Ausbildung, sagt der Ausbilder, und lacht über seinen eigenen Witz.
+
+Das Ticket 4711 ist gelöst. Niemand weiß, wer es gelöst hat. Vielleicht war es der Agent. Vielleicht war es der Azubi aus dem zweiten Lehrjahr. Vielleicht hat sich das Problem von selbst erledigt. Die Kaffeemaschine brummt zufrieden.
+
+Wochenende. Der Server brummt weiter. Die Azubis nicht. Das Modell trainiert über Nacht, Epoche für Epoche, und morgen ist der Loss ein kleines bisschen kleiner. Das ist alles, was man von einem Montag verlangen kann.
+
+Montag. Der erste Kaffee des Tages ist immer noch der wichtigste Kaffee des Tages. Die Azubis stehen vor der Maschine. Das Ticket 4712 ist aufgetaucht. Es geht von vorne los, und das ist gut so.
+
+Die Ausbilderin sagt: Wer Fragen stellt, lernt schneller. Die Azubis stellen Fragen. Wie lernt ein Modell? Was ist ein Gewicht? Warum heißt der Fehler Loss? Und wer hat das Kabel gezogen?
+
+Der Agent antwortet auf alle Fragen, außer auf die mit dem Kabel. Das Kabel bleibt ein Geheimnis. Manche Dinge muss ein Mensch klären. Das ist auch gut so.
+
+Die Jugendvertretung hat eine neue Kaffeemaschine beantragt. Der Antrag hat drei Seiten, eine Tabelle und ein Diagramm. Das Diagramm zeigt den Kaffeekonsum der Azubis. Der Trend zeigt nach oben. Der Betriebsrat ist beeindruckt.
+
+Ein Modell ohne Daten ist wie eine Kaffeemaschine ohne Bohnen. Es sieht gut aus, aber es passiert nichts. Ein Modell mit vielen Daten ist wie eine Kaffeemaschine mit vielen Bohnen. Es passiert sehr viel, und alle werden wach.
+
+Die Azubis trainieren ein kleines Modell. Das Modell lernt, blaue Punkte von orangen Punkten zu trennen. Nach hundert Epochen ist die Grenze noch krumm. Nach vierhundert Epochen ist die Grenze schön. Die Azubis sind stolz auf ihr Modell.
+
+Dann drehen sie an der Lernrate. Das Modell explodiert. Die Grenze ist weg, der Loss steigt in den Himmel. Die Azubis lachen und drehen die Lernrate wieder runter. Lernen heißt auch, Fehler zu machen und sie zu verstehen.
+
+Der Datenanalyst sagt: Ein Modell ist so gut wie seine Daten. Die Anwendungsentwicklerin sagt: Ein Modell ist so gut wie sein Test. Der Systemintegrator sagt: Ein Modell ist so gut wie der Server, auf dem es läuft. Alle haben recht, und der Kaffee ist alle.
+
+Ende der Chroniken. Fortsetzung folgt, jeden Montag, gleich nach dem ersten Kaffee.

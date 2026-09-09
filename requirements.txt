@@ -1,0 +1,7 @@
+# torch wird NICHT hier gelistet, sondern in .devcontainer/setup.sh als CPU-Variante
+# installiert (sonst zieht pip die 2,5-GB-CUDA-Version von PyPI).
+numpy>=2.0
+matplotlib>=3.9
+scikit-learn>=1.5
+ipykernel>=6.29
+ipywidgets>=8.1
