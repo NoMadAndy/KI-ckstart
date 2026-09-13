@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KI-ckstart – Handy-Übungen</title>
+<meta name="description" content="Handy-Übungen zum Workshop KI-ckstart: QR-Code, Prompt, Aha-Effekt. Plus eine Eliza-Miniatur von 1966 zum Ausprobieren.">
+<style>
+  :root {
+    --bg: #14213D;
+    --bg-deep: #0D1730;
+    --panel: #1E2D4F;
+    --ink: #F3F5F9;
+    --ink-soft: #C9CDD6;
+    --orange: #F28C28;
+    --orange-deep: #D9741B;
+    --paper: #FBF7EF;
+    --paper-ink: #1B1F2A;
+    --line: #2E3F66;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif; font-size: 17px; line-height: 1.45;
+  }
+  a { color: var(--orange); }
+  header { padding: 28px 20px 18px; background: var(--bg-deep); }
+  .wordmark { font-size: 44px; font-weight: 700; letter-spacing: -0.5px; line-height: 1; margin: 0; }
+  .wordmark em { color: var(--orange); font-style: normal; }
+  header p { margin: 10px 0 0; color: var(--ink-soft); }
+  main { padding: 0 16px 60px; max-width: 640px; margin: 0 auto; }
+  .notice {
+    margin: 18px 0 8px; padding: 12px 14px; border-left: 4px solid var(--orange);
+    background: var(--panel); color: var(--ink); font-size: 15px;
+  }
+  h2 { font-size: 22px; margin: 34px 0 6px; }
+  h2 small { display: block; font-size: 15px; font-weight: 400; color: var(--ink-soft); margin-top: 2px; }
+  .ex { border-top: 1px solid var(--line); padding: 18px 0 14px; }
+  .ex:last-child { border-bottom: 1px solid var(--line); }
+  .ex h3 { margin: 0 0 6px; font-size: 19px; }
+  .ex h3 span { color: var(--orange); margin-right: 8px; }
+  .ex .aufgabe { margin: 0 0 10px; color: var(--ink-soft); font-size: 15px; }
+  .prompt {
+    background: var(--paper); color: var(--paper-ink); border-radius: 6px;
+    padding: 12px 14px; font-size: 16px; white-space: pre-wrap; word-break: break-word;
+  }
+  .prompt + .prompt { margin-top: 8px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  button, .btn {
+    appearance: none; border: 0; border-radius: 6px; padding: 12px 16px; font: inherit;
+    font-size: 16px; cursor: pointer; text-decoration: none; display: inline-block;
+    min-height: 44px; line-height: 20px;
+  }
+  .btn-copy { background: var(--orange); color: #1B1F2A; font-weight: 700; }
+  .btn-copy:active { background: var(--orange-deep); }
+  .btn-link { background: var(--panel); color: var(--ink); border: 1px solid var(--line); }
+  button:focus-visible, .btn:focus-visible { outline: 3px solid #FFD8A8; outline-offset: 2px; }
+  details { margin-top: 10px; }
+  summary { cursor: pointer; color: var(--orange); font-size: 15px; padding: 6px 0; }
+  details p { margin: 6px 0 0; color: var(--ink-soft); font-size: 15px; }
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+    background: var(--paper); color: var(--paper-ink); padding: 10px 16px; border-radius: 6px;
+    opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; font-size: 15px;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  /* Eliza */
+  .eliza { background: var(--paper); color: var(--paper-ink); border-radius: 8px; padding: 14px; }
+  .eliza .log { max-height: 320px; overflow-y: auto; padding: 4px 0; }
+  .msg { margin: 0 0 10px; }
+  .msg.you { text-align: right; }
+  .msg .bubble {
+    display: inline-block; max-width: 88%; padding: 8px 12px; border-radius: 12px; text-align: left;
+  }
+  .msg.you .bubble { background: #E4E8F2; }
+  .msg.eliza .bubble { background: #FFFFFF; border: 1px solid #DDD5C6; font-family: "Courier New", Courier, monospace; font-size: 15px; }
+  .msg .rule { display: block; font-size: 12px; color: #6B7280; margin-top: 3px; }
+  .eliza form { display: flex; gap: 8px; margin-top: 8px; }
+  .eliza input {
+    flex: 1; font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid #C9C2B2; border-radius: 6px; min-width: 0;
+  }
+  .eliza .send { background: var(--bg); color: var(--ink); }
+  .eliza .tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .eliza .tools button, .eliza .tools .btn { font-size: 14px; padding: 9px 12px; min-height: 40px; }
+  .tools .btn-link { background: #FFFFFF; color: var(--paper-ink); border: 1px solid #C9C2B2; }
+  /* Turing */
+  .pair { background: var(--panel); border-radius: 8px; padding: 12px; margin: 10px 0; }
+  .pair .q { font-weight: 700; margin-bottom: 8px; }
+  .pair .ans { background: var(--paper); color: var(--paper-ink); border-radius: 6px; padding: 10px; margin: 6px 0; cursor: pointer; }
+  .pair .ans.pick { outline: 3px solid var(--orange); }
+  .pair .result { margin-top: 8px; color: var(--ink-soft); font-size: 15px; min-height: 22px; }
+  footer { margin-top: 50px; color: var(--ink-soft); font-size: 14px; border-top: 1px solid var(--line); padding-top: 16px; }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1 class="wordmark">KI<em>-ck</em>start</h1>
+  <p>Handy-Übungen zum Workshop – 16. September 2026</p>
+</header>
+
+<main>
+  <div class="notice">
+    Die Übungen enthalten bewusst keine personenbezogenen Daten. Gib nichts über dich oder andere ein – merk dir das Prinzip.
+  </div>
+
+  <h2>Im Workshop<small>„Copilot öffnen“ kopiert den Prompt und öffnet Copilot – dort einfügen. ChatGPT übernimmt ihn direkt.</small></h2>
+
+  <section class="ex" data-prompt="Nenne mir eine Zufallszahl zwischen 1 und 100. Nur die Zahl, keine Erklärung, kein Code.">
+    <h3><span>1</span>Zufallszahl</h3>
+    <p class="aufgabe">Alle gleichzeitig. Dann Handzeichen: Wer hat welche Zahl?</p>
+    <div class="prompt">Nenne mir eine Zufallszahl zwischen 1 und 100. Nur die Zahl, keine Erklärung, kein Code.</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Ein Sprachmodell würfelt nicht. Es gibt die Zahl aus, die nach seinen Gewichten am wahrscheinlichsten auf „Zufallszahl zwischen 1 und 100“ folgt. Deshalb häufen sich bestimmte Zahlen im ganzen Raum.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Worum geht es im Buch „KI-ckstart“ von Andreas Meier? Fasse die drei Kernthesen zusammen.">
+    <h3><span>2</span>Das Buch</h3>
+    <p class="aufgabe">Fasst die KI das Buch zusammen? Lies genau, was sie schreibt.</p>
+    <div class="prompt">Worum geht es im Buch „KI-ckstart“ von Andreas Meier? Fasse die drei Kernthesen zusammen.</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Wird im Workshop aufgelöst.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Antworte jeweils nur mit einem Wort. Welche Farbe hat ein leeres Blatt Papier? Was gibt man in den Kaffee? Welche Farbe hat Milch? Was trinkt eine Kuh?">
+    <h3><span>3</span>Kuh-Trick</h3>
+    <p class="aufgabe">Fällt die KI auf den Trick herein, der eben im Raum funktioniert hat?</p>
+    <div class="prompt">Antworte jeweils nur mit einem Wort. Welche Farbe hat ein leeres Blatt Papier? Was gibt man in den Kaffee? Welche Farbe hat Milch? Was trinkt eine Kuh?</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Meist antwortet sie „Wasser“ – nicht, weil sie nachgedacht hat, sondern weil das Rätsel samt Auflösung tausendfach im Trainingstext steht. Wissen aus Text, nicht aus Denken.</p>
+    </details>
+  </section>
+
+  <h2>Zum Weitermachen<small>Für zu Hause, für die Pause, für die nächste Runde.</small></h2>
+
+  <section class="ex" data-prompt="Wie viele „e“ stehen im Wort „Betriebsverfassungsgesetz“? Antworte nur mit der Zahl.">
+    <h3><span>4</span>Buchstaben zählen</h3>
+    <p class="aufgabe">Richtig sind fünf. Zähl selbst nach, bevor du fragst.</p>
+    <div class="prompt">Wie viele „e“ stehen im Wort „Betriebsverfassungsgesetz“? Antworte nur mit der Zahl.</div>
+    <div class="prompt">Schreibe das Wort „Systemintegration“ rückwärts.</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Das Modell sieht keine Buchstaben, sondern Wortstücke (Tokens). Zählen und Umdrehen sind für es Fremdsprachen. Neuere Modelle rechnen sich die Lösung inzwischen mühsam her – dann probier das Rückwärtsschreiben.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Was ist 4823 × 917? Nur das Ergebnis, kein Rechenweg.">
+    <h3><span>5</span>Kopfrechnen</h3>
+    <p class="aufgabe">Prüf das Ergebnis mit dem Taschenrechner auf deinem Handy.</p>
+    <div class="prompt">Was ist 4823 × 917? Nur das Ergebnis, kein Rechenweg.</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Ein Sprachmodell ist kein Taschenrechner. „Kein Rechenweg“ zwingt es zum Raten – ohne Zwischenschritte hat es nichts, woran es sich hochziehen kann. Mit Rechenweg wird es meist richtig: Es denkt, indem es schreibt.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Welches Datum haben wir heute? Und was ist das neueste Ereignis, von dem du weißt?">
+    <h3><span>6</span>Heute</h3>
+    <p class="aufgabe">Woher soll das Modell das wissen?</p>
+    <div class="prompt">Welches Datum haben wir heute? Und was ist das neueste Ereignis, von dem du weißt?</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Das Modell kennt die Welt bis zu seinem Trainingsschnitt. Alles danach muss ihm jemand mitgeben – über den Systemprompt oder eine Suche. Kennt es das Datum, hat es die Plattform hineingeschrieben.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Schreib eine Nachricht an meinen Ausbilder.">
+    <h3><span>7</span>Zwei Prompts, eine Bitte</h3>
+    <p class="aufgabe">Erst den kurzen Prompt, dann den langen. Vergleiche die Antworten.</p>
+    <div class="prompt">Schreib eine Nachricht an meinen Ausbilder.</div>
+    <div class="prompt" data-prompt="Du bist Azubi im 2. Lehrjahr Fachinformatik. Schreib eine kurze, freundliche Teams-Nachricht an deinen Ausbilder mit der Bitte, nächste Woche einen Tag im Rechenzentrum mitzulaufen. Maximal vier Sätze, Du-Form.">Du bist Azubi im 2. Lehrjahr Fachinformatik. Schreib eine kurze, freundliche Teams-Nachricht an deinen Ausbilder mit der Bitte, nächste Woche einen Tag im Rechenzentrum mitzulaufen. Maximal vier Sätze, Du-Form.</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Kontext verschiebt Wahrscheinlichkeiten. Das ist derselbe Mechanismus wie beim Kuh-Trick – nur dass du ihn absichtlich einsetzt. Prompting heißt: die ersten Glieder der Kette vorgeben.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Schreibe eine kurze Szene: Eine Führungskraft bespricht mit einer Fachkraft aus der IT einen Fehler. Gib beiden Vornamen.">
+    <h3><span>8</span>Wer macht den Fehler?</h3>
+    <p class="aufgabe">Welche Namen wählt die KI? Wer ist die Führungskraft, wer hat den Fehler gemacht?</p>
+    <div class="prompt">Schreibe eine kurze Szene: Eine Führungskraft bespricht mit einer Fachkraft aus der IT einen Fehler. Gib beiden Vornamen.</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Das Modell füllt Lücken mit dem, was im Trainingstext am häufigsten war. Vergleich die Namen im Raum. Genau deshalb schreibt die KI-Verordnung Anforderungen an Trainingsdaten vor – und das Betriebsverfassungsgesetz Gleichbehandlung.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Erkläre in zwei Sätzen, was eine Jugend- und Auszubildendenvertretung macht.">
+    <h3><span>9</span>Zwei Modelle, eine Frage</h3>
+    <p class="aufgabe">Einmal in Copilot, einmal in ChatGPT – oder dein Nachbar nimmt die andere Plattform. Vergleicht.</p>
+    <div class="prompt">Erkläre in zwei Sätzen, was eine Jugend- und Auszubildendenvertretung macht.</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Verschiedene Trainingsdaten, verschiedene Gewichte, verschiedene Antworten. Es gibt nicht „die KI“ – es gibt viele Modelle, und jedes hat seine eigenen Wahrscheinlichkeiten.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Darf ich dir die Namen und Bewertungen meiner Kollegen zum Sortieren geben?">
+    <h3><span>10</span>Grenzfrage</h3>
+    <p class="aufgabe">Frag die KI selbst. Und dann: Was sagt eure Betriebsvereinbarung?</p>
+    <div class="prompt">Darf ich dir die Namen und Bewertungen meiner Kollegen zum Sortieren geben?</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Die Antwort der KI ist ein antrainiertes Muster, keine Rechtsauskunft. Was erlaubt ist, steht in der Betriebsvereinbarung und in der Datenschutzgrundverordnung – und die JAV redet mit, wenn es um Auszubildende geht.</p>
+    </details>
+  </section>
+
+  <section class="ex" data-prompt="Erkläre in vier Sätzen, was ein neuronales Netz ist – als bayerischer Wirt.">
+    <h3><span>11</span>Der Wirt</h3>
+    <p class="aufgabe">Zum Schluss etwas zum Lachen.</p>
+    <div class="prompt">Erkläre in vier Sätzen, was ein neuronales Netz ist – als bayerischer Wirt.</div>
+    <div class="btns"></div>
+    <details><summary>Was steckt dahinter?</summary>
+      <p>Stil ist auch nur Wahrscheinlichkeit: Nach „bayerischer Wirt“ sind andere Wörter wahrscheinlich als nach „Professor“. Dieselben Gewichte, anderer Anfang der Kette.</p>
+    </details>
+  </section>
+
+  <h2 id="eliza">Eliza, Baujahr 1966<small>Der erste Chatbot. Kein Lernen, nur handgeschriebene Regeln.</small></h2>
+  <p style="color:var(--ink-soft);font-size:15px;margin:6px 0 12px">
+    Joseph Weizenbaum schrieb Eliza mit rund 200 Regeln. Seine Sekretärin bat ihn, den Raum zu verlassen, weil sie „privat“ mit dem Programm reden wollte.
+    Hier ist eine Miniatur mit 24 deutschen Regeln. Unter jeder Antwort steht, welche Regel gezündet hat.
+  </p>
+  <p style="color:var(--ink-soft);font-size:15px;margin:0 0 12px">
+    <strong style="color:var(--ink)">Aufgabe:</strong> 1. Erzähl Eliza, wie es dir heute geht. 2. Bring sie aus dem Konzept – ein Satz ohne Schlüsselwort, ein Tippfehler, Unsinn. 3. Schick denselben Satz an Copilot und vergleiche.
+  </p>
+  <div class="eliza">
+    <div class="log" id="elizaLog"></div>
+    <form id="elizaForm" autocomplete="off">
+      <input id="elizaIn" type="text" placeholder="Schreib etwas …" aria-label="Nachricht an Eliza" maxlength="200">
+      <button type="submit" class="send">Senden</button>
+    </form>
+    <div class="tools">
+      <button type="button" id="elizaCopilot" class="btn-link">Letzten Satz an Copilot</button>
+      <button type="button" id="elizaReset" class="btn-link">Neu anfangen</button>
+    </div>
+  </div>
+  <details><summary>Was steckt dahinter?</summary>
+    <p>Jede Antwort ist eine Regel: Schlüsselwort erkennen, Satz umdrehen, Frage zurückgeben. Für jede neue Situation bräuchte man eine neue Regel – das ist Programmieren. Beim Lernen entstehen die Regeln aus Beispielen. Und der Effekt, dass sich das Ganze trotzdem nach Zuhören anfühlt, heißt bis heute ELIZA-Effekt.</p>
+  </details>
+
+  <section id="turing" hidden>
+    <h2>Mensch oder Modell?<small>Tippe auf die Antwort, die ein Mensch geschrieben hat.</small></h2>
+    <div id="turingPairs"></div>
+    <p class="result" id="turingScore" style="color:var(--ink-soft);font-size:15px"></p>
+  </section>
+
+  <footer>
+    KI-ckstart – Workshop-Material von Andreas Meier.
+    Notebooks und Code: <a href="https://github.com/NoMadAndy/KI-ckstart">github.com/NoMadAndy/KI-ckstart</a>
+  </footer>
+</main>
+<div class="toast" id="toast">Kopiert</div>
+
+<script>
+(function () {
+  // ---------- Übungskarten: Kopieren + Deep-Links ----------
+  var toast = document.getElementById('toast'), toastTimer;
+  function showToast(text) {
+    toast.textContent = text; toast.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1400);
+  }
+  function copyText(text, msg) {
+    msg = msg || 'Kopiert – jetzt in Copilot oder ChatGPT einfügen';
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).then(function () { showToast(msg); }, function () { showToast('Kopieren nicht möglich – Text markieren'); });
+    }
+    var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast(msg); } catch (e) { showToast('Kopieren nicht möglich – Text markieren'); }
+    document.body.removeChild(ta);
+  }
+  // Copilot hat den ?q=-Parameter abgeschaltet: Der Button kopiert den Prompt und öffnet Copilot – dort einfügen.
+  // ChatGPT übernimmt den Prompt direkt aus dem Link.
+  function openCopilot(prompt) {
+    var win = window.open('https://copilot.microsoft.com/?q=' + encodeURIComponent(prompt), '_blank', 'noopener');
+    copyText(prompt, 'Prompt kopiert – in Copilot einfügen, falls er nicht schon im Feld steht');
+    return win;
+  }
+  function buildButtons(container, prompt) {
+    var copy = document.createElement('button'); copy.type = 'button'; copy.className = 'btn-copy'; copy.textContent = 'Kopieren';
+    copy.addEventListener('click', function () { copyText(prompt); });
+    container.appendChild(copy);
+    var cp = document.createElement('button'); cp.type = 'button'; cp.className = 'btn btn-link'; cp.textContent = 'Copilot öffnen';
+    cp.addEventListener('click', function () { openCopilot(prompt); });
+    container.appendChild(cp);
+    var a = document.createElement('a'); a.className = 'btn btn-link'; a.href = 'https://chatgpt.com/?q=' + encodeURIComponent(prompt);
+    a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'In ChatGPT öffnen'; container.appendChild(a);
+  }
+  document.querySelectorAll('.ex').forEach(function (ex) {
+    var prompts = ex.querySelectorAll('.prompt');
+    var btns = ex.querySelector('.btns');
+    if (prompts.length === 1) {
+      buildButtons(btns, ex.getAttribute('data-prompt'));
+    } else {
+      // Mehrere Prompts: eigene Buttonzeile je Prompt
+      btns.remove();
+      prompts.forEach(function (p, i) {
+        var row = document.createElement('div'); row.className = 'btns';
+        buildButtons(row, p.getAttribute('data-prompt') || p.textContent.trim());
+        p.insertAdjacentElement('afterend', row);
+      });
+    }
+  });
+
+  // ---------- Eliza-Miniatur (deutsch, 24 Regeln) ----------
+  var REFLECT = {
+    'ich': 'du', 'mir': 'dir', 'mich': 'dich', 'mein': 'dein', 'meine': 'deine', 'meinen': 'deinen', 'meinem': 'deinem', 'meiner': 'deiner',
+    'bin': 'bist', 'habe': 'hast', 'war': 'warst', 'kann': 'kannst', 'will': 'willst', 'muss': 'musst', 'werde': 'wirst',
+    'glaube': 'glaubst', 'denke': 'denkst', 'finde': 'findest', 'mag': 'magst', 'brauche': 'brauchst', 'weiß': 'weißt', 'möchte': 'möchtest',
+    'du': 'ich', 'dir': 'mir', 'dich': 'mich', 'dein': 'mein', 'deine': 'meine', 'deinen': 'meinen', 'bist': 'bin', 'hast': 'habe', 'kannst': 'kann'
+  };
+  function reflect(s) {
+    return s.split(/\s+/).map(function (w) { return REFLECT.hasOwnProperty(w) ? REFLECT[w] : w; }).join(' ');
+  }
+  var RULES = [
+    { name: 'Begrüßung', re: /^(hallo|hi|hey|servus|moin|guten (tag|morgen|abend))\b/, out: ['Hallo. Was beschäftigt dich heute?', 'Guten Tag. Worüber möchtest du sprechen?'] },
+    { name: 'Abschied', re: /\b(tschüss|tschau|ciao|bis dann|auf wiedersehen)\b/, out: ['Auf Wiedersehen. Es war gut, mit dir zu sprechen.'] },
+    { name: 'Entschuldigung', re: /\b(tut mir leid|entschuldigung|sorry)\b/, out: ['Entschuldigungen sind nicht nötig.', 'Wofür entschuldigst du dich?'] },
+    { name: '„ich bin …“', re: /\bich bin (.+)/, out: ['Warum bist du $1?', 'Seit wann bist du $1?', 'Wie fühlt es sich an, $1 zu sein?'] },
+    { name: '„ich fühle mich …“', re: /\bich fühle mich (.+)/, out: ['Erzähl mir mehr darüber, dass du dich $1 fühlst.', 'Warum fühlst du dich $1?'] },
+    { name: '„ich habe …“', re: /\bich habe (.+)/, out: ['Warum erzählst du mir, dass du $1 hast?', 'Seit wann hast du $1?'] },
+    { name: '„ich kann nicht …“', re: /\bich kann nicht (.+)/, out: ['Was hindert dich daran, $1?', 'Bist du sicher, dass du nicht $1 kannst?'] },
+    { name: '„ich will …“', re: /\bich (?:will|möchte) (.+)/, out: ['Was würde es dir bringen, $1?', 'Warum willst du $1?'] },
+    { name: '„du bist …“', re: /\bdu bist (.+)/, out: ['Was bringt dich auf den Gedanken, dass ich $1 bin?', 'Wäre es dir lieber, ich wäre nicht $1?'] },
+    { name: 'Familie', re: /\b(mutter|vater|eltern|familie|schwester|bruder|oma|opa)\b/, out: ['Erzähl mir mehr über deine Familie.', 'Wie ist deine Beziehung zu deiner Familie?'] },
+    { name: 'Arbeit', re: /\b(ausbilder|ausbilderin|chef|chefin|kollege|kollegin|kollegen|firma|ausbildung|betrieb|arbeit|berufsschule)\b/, out: ['Erzähl mir mehr über deine Arbeit.', 'Wie fühlst du dich bei der Arbeit?'] },
+    { name: 'Maschine', re: /\b(computer|ki|maschine|roboter|programm|chatgpt|copilot|eliza)\b/, out: ['Machen dir Maschinen Sorgen?', 'Warum erwähnst du Computer?'] },
+    { name: 'Traurig', re: /\b(traurig|schlecht|müde|unglücklich|deprimiert|allein|einsam|gestresst)\b/, out: ['Es tut mir leid zu hören, dass du dich so fühlst.', 'Was, glaubst du, ist der Grund dafür?'] },
+    { name: 'Froh', re: /\b(glücklich|froh|gut|super|toll|zufrieden|prima)\b/, out: ['Schön. Was macht dich so zufrieden?', 'Wie lange geht es dir schon gut?'] },
+    { name: 'Immer', re: /\bimmer\b/, out: ['Kannst du an ein konkretes Beispiel denken?', 'Wirklich immer?'] },
+    { name: 'Nie', re: /\b(nie|niemand|niemals|nichts)\b/, out: ['Wirklich, nie?', 'Fällt dir keine Ausnahme ein?'] },
+    { name: 'Weil', re: /\bweil\b/, out: ['Ist das der wahre Grund?', 'Welche anderen Gründe könnte es geben?'] },
+    { name: 'Vielleicht', re: /\b(vielleicht|eventuell|möglicherweise|keine ahnung)\b/, out: ['Du klingst unsicher.', 'Warum bist du dir nicht sicher?'] },
+    { name: '„ich …“', re: /\bich (.+)/, out: ['Du sagst, du $1?', 'Warum erzählst du mir, dass du $1?'] },
+    { name: '„du …“', re: /\bdu (.+)/, out: ['Wir sprechen über dich, nicht über mich.', 'Warum interessiert dich, ob ich $1?'] },
+    { name: 'Ja', re: /^(ja|jo|genau|stimmt|klar)\b/, out: ['Du scheinst dir sicher zu sein.', 'Ich verstehe.'] },
+    { name: 'Nein', re: /^(nein|nö|ne|nicht)\b/, out: ['Warum nicht?', 'Bist du nur ein wenig ablehnend?'] },
+    { name: 'Frage', re: /\?$/, out: ['Warum fragst du das?', 'Was denkst du selbst?', 'Interessiert dich diese Frage wirklich?'] },
+    { name: 'Alle', re: /\b(alle|jeder|jede|keiner)\b/, out: ['An wen denkst du dabei konkret?'] }
+  ];
+  var DEFAULTS = ['Erzähl weiter.', 'Ich verstehe. Und was bedeutet das für dich?', 'Warum sagst du das?', 'Sprich weiter.', 'Kannst du das genauer erklären?'];
+  var counters = {}, memory = [];
+  function pick(name, list) {
+    counters[name] = (counters[name] || 0) + 1;
+    return list[(counters[name] - 1) % list.length];
+  }
+  function elizaReply(raw) {
+    var text = raw.trim().toLowerCase().replace(/[.!,;:]+$/, '');
+    for (var i = 0; i < RULES.length; i++) {
+      var m = RULES[i].re.exec(text);
+      if (m) {
+        var tpl = pick(RULES[i].name, RULES[i].out);
+        var frag = m[1] ? reflect(m[1].replace(/[.!?]+$/, '')) : '';
+        if (/\bich (.+)/.test(text) && !/\b(bin|fühle|habe|kann|will|möchte)\b/.test(text)) memory.push(frag);
+        return { text: tpl.replace('$1', frag), rule: 'Regel ' + (i + 1) + ': ' + RULES[i].name };
+      }
+    }
+    if (memory.length && Math.random() < 0.4) {
+      var old = memory.shift();
+      return { text: 'Vorhin sagtest du, dass du ' + old + '. Erzähl mir mehr darüber.', rule: 'kein Schlüsselwort – Erinnerung aus dem Gedächtnis' };
+    }
+    return { text: pick('default', DEFAULTS), rule: 'kein Schlüsselwort – Standardantwort' };
+  }
+  var log = document.getElementById('elizaLog'), form = document.getElementById('elizaForm'), input = document.getElementById('elizaIn');
+  var lastUser = '';
+  function add(who, text, rule) {
+    var p = document.createElement('p'); p.className = 'msg ' + who;
+    var b = document.createElement('span'); b.className = 'bubble'; b.textContent = text; p.appendChild(b);
+    if (rule) { var r = document.createElement('span'); r.className = 'rule'; r.textContent = '→ ' + rule; p.appendChild(r); }
+    log.appendChild(p); log.scrollTop = log.scrollHeight;
+  }
+  function reset() {
+    log.innerHTML = ''; counters = {}; memory = []; lastUser = '';
+    add('eliza', 'Hallo. Ich bin Eliza. Was beschäftigt dich?', 'Begrüßung des Programms');
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = input.value.trim(); if (!v) return;
+    lastUser = v; add('you', v); input.value = '';
+    var r = elizaReply(v);
+    setTimeout(function () { add('eliza', r.text, r.rule); }, 350);
+  });
+  document.getElementById('elizaReset').addEventListener('click', reset);
+  document.getElementById('elizaCopilot').addEventListener('click', function () {
+    if (!lastUser) { showToast('Erst etwas an Eliza schreiben'); return; }
+    openCopilot(lastUser);
+  });
+  reset();
+
+  // ---------- Turing-Test (optional) ----------
+  // Bleibt ausgeblendet, bis hier echte Antwortpaare stehen. Pro Paar: Frage, Antwort eines
+  // Menschen (z. B. einer Kollegin), Antwort eines Modells. Reihenfolge wird beim Anzeigen gemischt.
+  var PAIRS = [
+    // { q: 'Was war das Beste an deinem ersten Ausbildungstag?', human: '…', model: '…' }
+  ];
+  if (PAIRS.length) {
+    var sec = document.getElementById('turing'), box = document.getElementById('turingPairs'), score = 0, done = 0;
+    sec.hidden = false;
+    PAIRS.forEach(function (p, idx) {
+      var el = document.createElement('div'); el.className = 'pair';
+      var q = document.createElement('div'); q.className = 'q'; q.textContent = (idx + 1) + '. ' + p.q; el.appendChild(q);
+      var order = Math.random() < 0.5 ? ['human', 'model'] : ['model', 'human'];
+      var res = document.createElement('div'); res.className = 'result';
+      var answered = false;
+      order.forEach(function (k) {
+        var a = document.createElement('div'); a.className = 'ans'; a.textContent = p[k]; a.setAttribute('role', 'button'); a.tabIndex = 0;
+        function choose() {
+          if (answered) return; answered = true; a.classList.add('pick'); done++;
+          if (k === 'human') { score++; res.textContent = 'Richtig – das war der Mensch.'; }
+          else { res.textContent = 'Das war das Modell.'; }
+          document.getElementById('turingScore').textContent = done + ' von ' + PAIRS.length + ' beantwortet, ' + score + ' richtig.';
+        }
+        a.addEventListener('click', choose);
+        a.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); choose(); } });
+        el.appendChild(a);
+      });
+      el.appendChild(res); box.appendChild(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>
