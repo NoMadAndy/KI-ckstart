@@ -1,0 +1,38 @@
+{
+  "name": "KI-ckstart",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+
+  // Läuft beim Prebuild – so ist torch schon da, wenn der Codespace startet.
+  // (postCreateCommand würde erst NACH der Zuweisung an den Nutzer laufen.)
+  "onCreateCommand": "bash .devcontainer/setup.sh",
+  "waitFor": "onCreateCommand",
+
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "32gb"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "jupyter.askForKernelRestart": false,
+        "jupyter.interactiveWindow.textEditor.executeSelection": true,
+        "notebook.output.scrolling": true,
+        "workbench.startupEditor": "none",
+        "workbench.editorAssociations": { "*.ipynb": "jupyter-notebook" }
+      }
+    },
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "01_wie_lernt_eine_maschine.ipynb"
+      ]
+    }
+  }
+}
