@@ -9,7 +9,7 @@ echo "▶ Restliche Pakete installieren …"
 pip install --no-cache-dir -r requirements.txt
 
 echo "▶ Jupyter-Kernel registrieren …"
-python -m ipykernel install --user --name python3 --display-name "Python 3 (Workshop)"
+python -m ipykernel install --user --name workshop --display-name "Python 3 (Workshop)"
 
 echo "▶ Import-Test …"
 python - <<'EOF'

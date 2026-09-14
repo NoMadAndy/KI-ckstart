@@ -21,6 +21,8 @@
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.analysis.diagnosticSeverityOverrides": { "reportMissingImports": "none" },
+        "jupyter.kernels.excludePythonEnvironments": ["/usr/bin/python3", "/usr/bin/python3.11", "/bin/python3"],
         "jupyter.askForKernelRestart": false,
         "jupyter.interactiveWindow.textEditor.executeSelection": true,
         "notebook.output.scrolling": true,
